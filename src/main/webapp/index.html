@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Algas Kalkulators</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css">
+    <link rel="icon" type="image/png" href="http://www.rw-designer.com/icon-image/7835-256x256x32.png">
+
+    <!-- Load scripts before body, so user doesn't see unformatted forms -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+    <script src="app/constants.js"></script>
+    <script src="app/app.js"></script>
+</head>
+<body ng-app="myApp">
+
+<div class="container" ng-controller="MainCtrl" ng-cloak>
+
+    <div class="page-header">
+        <h1 class="text-center" ng-click="go()">Algas kalkulators</h1>
+        <img ng-show="g" style="position: absolute; z-index: 9"
+             src="https://pbs.twimg.com/profile_images/378800000822867536/3f5a00acf72df93528b6bb7cd0a4fd0c.jpeg"/>
+    </div>
+
+    <button type="button" class="btn btn-default" ng-click="infoToggle()">{{infoText}}</button>
+    <div uib-collapse="hideInfo">
+        <div class="well well-lg">
+            <ul>
+                <li>
+                    Izmantoju VID aktuālos datus par nodokļu procentiem.
+                </li>
+                <li>
+                    Ērtības labad gross salary tiks saukts par bruto un net salary par neto.
+                </li>
+                <li>
+                    Izmantoju http://api.fixer.io/latest servisu priekš valūtas konvertācijas.
+                </li>
+                <li>
+                    Stuff used: <br/>
+                    <ul>
+                        <li>Bootstrap</li>
+                        <li>Angular</li>
+                        <li>Maven</li>
+                        <li>Jersey</li>
+                        <li>log4j</li>
+                        <li>transer object format = json</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <uib-tabset>
+        <uib-tab heading="Solis 1">
+            <my-tab title="1. Solis" calculate="calculate1" result="neto1"></my-tab>
+        </uib-tab>
+
+        <uib-tab heading="Solis 2">
+            <my-tab title="2. Solis" calculate="calculate2" result="neto2"></my-tab>
+        </uib-tab>
+
+        <uib-tab heading="Solis 3">
+            <my-tab title="3. Solis" calculate="calculate3" result="neto3" show-dependents="true"></my-tab>
+        </uib-tab>
+
+        <uib-tab heading="Solis 4">
+            <my-tab title="4. Solis" calculate="calculate4" result="salary4" show-dependents="true"
+                    salary-object="true"></my-tab>
+        </uib-tab>
+
+        <uib-tab heading="Solis 5">
+            <my-tab title="5. Solis" calculate="calculate5" result="salary5" show-dependents="true" salary-object="true"
+                    use-currency="true" currencies="currencies"></my-tab>
+        </uib-tab>
+    </uib-tabset>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<div class="jumbotron col-md-6 text-center">
+    <!--<h1>{{title}}</h1>-->
+
+    <form name="form" ng-submit="calculate(bruto, dependents)">
+        <!--BRUTO SALARY-->
+        <div class="form-group">
+            <label for="bruto">Bruto alga:</label>
+
+            <div class="input-group">
+                <div class="input-group-addon">€</div>
+                <input type="number" id="bruto" name="bruto" ng-model="bruto" class="form-control" min="0"
+                       ng-required="true">
+            </div>
+        </div>
+
+        <!--DEPENDENT COUNT-->
+        <div class="form-group" ng-show="showDependents">
+            <label for="dependents">Personas apgādībā:</label>
+            <input type="number" id="dependents" name="dependents" ng-model="dependents" min="0"
+                   ng-required="showDependents" class="form-control">
+        </div>
+
+        <!--CURRENCY-->
+        <div class="form-group" ng-show="useCurrency">
+            <label for="currency">Algas valūta:</label>
+            <select id="currency" ng-model="currency"
+                    ng-options="currency as currency.name for currency in currencies track by currency.name"
+                    class="form-control"></select>
+        </div>
+
+        <!--CALCULATE-->
+        <button type="submit" class="btn btn-lg btn-primary text-center">Aprēķināt</button>
+    </form>
+
+    <!--RESULT-->
+    <div style="margin-top: 20px;">
+        <!--FORMS 1-3-->
+        <div ng-show="!salaryObject && result >= 0">
+            <p>
+                Aprēķinātā neto alga <br/>
+                <strong>{{result | number:2}}</strong>
+            </p>
+        </div>
+
+        <!--FORM 4-->
+        <div ng-show="result.neto && !useCurrency">
+            <p>
+                Aprēķinātā neto alga<br/>
+                <strong>{{result.neto | number:2}}</strong>
+            </p>
+            <p>
+                Darba devēja kopējās izmaksas<br/>
+                <strong>{{result.totalPayout | number:2}}</strong>
+            </p>
+        </div>
+
+        <!--FORM 5-->
+        <div ng-show="result.neto && useCurrency">
+            <p>
+                Aprēķinātā neto alga<br/>
+                <strong>{{result.neto * currency.rate | number:2}} {{currency.name}}</strong>
+            </p>
+
+            <p>
+                Darba devēja kopējās izmaksas<br/>
+                <strong>{{result.totalPayout * currency.rate | number:2}} {{currency.name}}</strong>
+            </p>
+        </div>
+
+    </div>
+</div>
